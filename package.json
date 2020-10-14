@@ -1,5 +1,5 @@
 {
-  "homepage": "https://annblack.github.io/web-zxing",
+  "homepage": "https://annblack.github.io/qr-web",
   "name": "qr-scanner",
   "version": "0.0.1",
   "private": true,
@@ -27,7 +27,7 @@
   },
   "scripts": {
     "predeploy": "yarn run build",
-    "deploy": "gh-pages -b master -d build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
