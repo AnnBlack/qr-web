@@ -1,0 +1,92 @@
+{
+  "extends": [
+    "eslint-config-react-app",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["react-app", "react", "@typescript-eslint", "prettier"],
+  "env": {
+    "browser": true,
+    "jest": true,
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "classes": false
+      }
+    ],
+    "@typescript-eslint/consistent-type-definitions": ["error", "interface"],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-empty-interface": "warn",
+    "@typescript-eslint/no-empty-function": "warn",
+
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "react/no-unescaped-entities": "off",
+    "react/jsx-fragments": ["error", "element"],
+    "react/jsx-curly-brace-presence": [
+      "error",
+      {
+        "props": "always",
+        "children": "never"
+      }
+    ],
+    "react/jsx-boolean-value": "error",
+    "react/jsx-key": "off",
+    "react-hooks/rules-of-hooks": "off",
+
+    "prettier/prettier": ["error", {"singleQuote": true}],
+    "no-irregular-whitespace": "off",
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "util",
+            "message": "This is NodeJS library, don't use it"
+          },
+          {
+            "name": "path",
+            "message": "This is NodeJS library, don't use it"
+          }
+        ],
+        "patterns": ["fp-ts/es6/*"]
+      }
+    ],
+    "no-duplicate-imports": ["error", {"includeExports": true}],
+    "arrow-body-style": ["warn", "as-needed"],
+    "id-blacklist": ["warn", "_"],
+    "no-restricted-globals": ["error", "name", "toString", "pending"],
+    "prefer-template": "error",
+    "no-empty-pattern": "warn",
+    "curly": "error"
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "parser": "@typescript-eslint/parser"
+}
