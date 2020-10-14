@@ -1,4 +1,5 @@
 {
+  "homepage": "https://annblack.github.io/web-qr-scanning-with-zxing/",
   "name": "qr-scanner",
   "version": "0.0.1",
   "private": true,
@@ -14,16 +15,19 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@zxing/library": "^0.17.1",
+    "eslint-config-prettier": "^6.9.0",
     "fp-ts": "^2.7.0",
+    "gh-pages": "^3.1.0",
     "html5-qrcode": "^1.2.3",
     "prettier": "^2.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
-    "typescript": "^3.9.7",
-    "eslint-config-prettier": "^6.9.0"
+    "typescript": "^3.9.7"
   },
   "scripts": {
+    "predeploy": "react-scripts build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
