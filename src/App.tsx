@@ -39,6 +39,10 @@ const SelectStyled = styled.select`
 		height: 20px;
 	}
 `;
+const TextStyled = styled.div`
+	max-width: 400px;
+	margin-top: 20px;
+`;
 //#endregionƒ
 
 export const App = React.memo(() => {
@@ -46,6 +50,7 @@ export const App = React.memo(() => {
 	const [result, setResult] = React.useState<Option<Result>>(option.none);
 	const [isCameraActive, setIsCameraActive] = React.useState<boolean>(false);
 	const [deviceInfo, setDeviceInfo] = React.useState<Array<MediaDeviceInfo>>([]);
+
 	const videoRef = React.useRef<HTMLVideoElement>(null);
 	const codeReader = React.useMemo(() => new BrowserMultiFormatReader(), []);
 
@@ -58,10 +63,22 @@ export const App = React.memo(() => {
 			.catch(err => console.log(err));
 	}, []);
 
+	console.log('deviceId', deviceId);
+
+	// React.useEffect(() => {
+	// 	codeReader
+	// 		.listVideoInputDevices()
+	// 		.then(devices => {
+	// 			devices.map(device => {
+	// 				console.log('device', device);
+	// 				return setDeviceInfo(prev => [...prev, device]);
+	// 			});
+	// 		})
+	// 		.catch(e => console.log(e));
+	// }, [codeReader]);
+
 	const start = React.useCallback(() => {
 		//decoding starts
-		console.log('decoding starts');
-		console.log('deviceId', deviceId);
 		codeReader
 			.decodeFromVideoDevice(deviceId, videoRef.current, (result, error) => {
 				setIsCameraActive(true);
@@ -73,6 +90,7 @@ export const App = React.memo(() => {
 					console.error('error 1', error);
 				}
 			})
+
 			.catch(error => {
 				console.log('error 2', error);
 			});
@@ -100,11 +118,19 @@ export const App = React.memo(() => {
 		[result],
 	);
 
-	React.useEffect(() => console.log('deviceInfo', deviceInfo), [deviceInfo]);
+	React.useEffect(() => {
+		console.log('deviceInfo', deviceInfo);
+	}, [deviceInfo]);
 
 	const handleChange = React.useCallback(event => {
 		setDeviceId(event.target.value);
 	}, []);
+
+	const getDeviceInfo = React.useMemo(
+		() => deviceInfo.map(device => `${device.kind} ${device.deviceId} ${device.groupId} ${device.label}`),
+
+		[deviceInfo],
+	);
 	return (
 		<React.Fragment>
 			<Global styles={globalStyles} />
@@ -129,6 +155,7 @@ export const App = React.memo(() => {
 					))}
 				</SelectStyled>
 				<button onClick={reset}>Turn off Camera</button>
+				<TextStyled>{getDeviceInfo}</TextStyled>
 			</ResultAreaStyled>
 		</React.Fragment>
 	);
