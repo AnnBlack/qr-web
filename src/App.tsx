@@ -20,6 +20,7 @@ const WrapperStyled = styled.div`
 	max-width: 400px;
 	height: 200px;
 	padding: 5px;
+	position: relative;
 `;
 const CameraAreaStyled = styled.div`
 	width: inherit;
@@ -28,6 +29,14 @@ const CameraAreaStyled = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+`;
+const ActiveButtonStyles = styled.button`
+	z-index: 1;
+`;
+const VideoStyled = styled.video`
+	position: absolute;
+	top: 0;
+	z-index: 0;
 `;
 const ResultAreaStyled = styled.div`
 	padding: 5px;
@@ -38,10 +47,6 @@ const SelectStyled = styled.select`
 	option {
 		height: 20px;
 	}
-`;
-const TextStyled = styled.div`
-	max-width: 400px;
-	margin-top: 20px;
 `;
 //#endregionƒ
 
@@ -62,20 +67,6 @@ export const App = React.memo(() => {
 			)
 			.catch(err => console.log(err));
 	}, []);
-
-	console.log('deviceId', deviceId);
-
-	// React.useEffect(() => {
-	// 	codeReader
-	// 		.listVideoInputDevices()
-	// 		.then(devices => {
-	// 			devices.map(device => {
-	// 				console.log('device', device);
-	// 				return setDeviceInfo(prev => [...prev, device]);
-	// 			});
-	// 		})
-	// 		.catch(e => console.log(e));
-	// }, [codeReader]);
 
 	const start = React.useCallback(() => {
 		//decoding starts
@@ -126,11 +117,6 @@ export const App = React.memo(() => {
 		setDeviceId(event.target.value);
 	}, []);
 
-	const getDeviceInfo = React.useMemo(
-		() => deviceInfo.map(device => `${device.kind} ${device.deviceId} ${device.groupId} ${device.label}`),
-
-		[deviceInfo],
-	);
 	return (
 		<React.Fragment>
 			<Global styles={globalStyles} />
@@ -138,12 +124,12 @@ export const App = React.memo(() => {
 			<WrapperStyled>
 				{!isCameraActive ? (
 					<CameraAreaStyled>
-						<button onClick={start}>Activate Camera</button>
+						<ActiveButtonStyles onClick={start}>Activate Camera</ActiveButtonStyles>
 					</CameraAreaStyled>
 				) : (
 					''
 				)}
-				<video ref={videoRef} autoPlay width={'100%'} height={'200'} />
+				<VideoStyled ref={videoRef} autoPlay width={'100%'} height={'200'} />
 			</WrapperStyled>
 			<ResultAreaStyled>
 				{getResult}
@@ -155,7 +141,6 @@ export const App = React.memo(() => {
 					))}
 				</SelectStyled>
 				<button onClick={reset}>Turn off Camera</button>
-				<TextStyled>{getDeviceInfo}</TextStyled>
 			</ResultAreaStyled>
 		</React.Fragment>
 	);
