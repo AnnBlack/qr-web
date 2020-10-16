@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/qr-web/static/js/main.719368aa.chunk.js",
-    "main.js.map": "/qr-web/static/js/main.719368aa.chunk.js.map",
+    "main.js": "/qr-web/static/js/main.07a76a1a.chunk.js",
+    "main.js.map": "/qr-web/static/js/main.07a76a1a.chunk.js.map",
     "runtime-main.js": "/qr-web/static/js/runtime-main.a1653429.js",
     "runtime-main.js.map": "/qr-web/static/js/runtime-main.a1653429.js.map",
-    "static/js/2.855b5ab0.chunk.js": "/qr-web/static/js/2.855b5ab0.chunk.js",
-    "static/js/2.855b5ab0.chunk.js.map": "/qr-web/static/js/2.855b5ab0.chunk.js.map",
+    "static/js/2.6bed7943.chunk.js": "/qr-web/static/js/2.6bed7943.chunk.js",
+    "static/js/2.6bed7943.chunk.js.map": "/qr-web/static/js/2.6bed7943.chunk.js.map",
     "index.html": "/qr-web/index.html",
-    "precache-manifest.825d0937f49dc98c25dc34cf581fa855.js": "/qr-web/precache-manifest.825d0937f49dc98c25dc34cf581fa855.js",
+    "precache-manifest.541561fc861cc4ddf1a9cdbcb69eb39f.js": "/qr-web/precache-manifest.541561fc861cc4ddf1a9cdbcb69eb39f.js",
     "service-worker.js": "/qr-web/service-worker.js",
-    "static/js/2.855b5ab0.chunk.js.LICENSE.txt": "/qr-web/static/js/2.855b5ab0.chunk.js.LICENSE.txt"
+    "static/js/2.6bed7943.chunk.js.LICENSE.txt": "/qr-web/static/js/2.6bed7943.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a1653429.js",
-    "static/js/2.855b5ab0.chunk.js",
-    "static/js/main.719368aa.chunk.js"
+    "static/js/2.6bed7943.chunk.js",
+    "static/js/main.07a76a1a.chunk.js"
   ]
 }
