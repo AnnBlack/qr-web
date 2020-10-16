@@ -32,19 +32,29 @@ const CameraAreaStyled = styled.div`
 const ResultAreaStyled = styled.div`
 	padding: 5px;
 `;
-//#endregion
+const SelectStyled = styled.select`
+	display: flex;
+	margin-bottom: 15px;
+	option {
+		height: 20px;
+	}
+`;
+//#endregionƒ
 
 export const App = React.memo(() => {
 	const [deviceId, setDeviceId] = React.useState<string>('');
 	const [result, setResult] = React.useState<Option<Result>>(option.none);
 	const [isCameraActive, setIsCameraActive] = React.useState<boolean>(false);
+	const [deviceInfo, setDeviceInfo] = React.useState<Array<MediaDeviceInfo>>([]);
 	const videoRef = React.useRef<HTMLVideoElement>(null);
 	const codeReader = React.useMemo(() => new BrowserMultiFormatReader(), []);
 
 	React.useEffect(() => {
 		navigator.mediaDevices
 			.enumerateDevices()
-			.then(data => data.map(item => (item.kind === 'videoinput' ? setDeviceId(item.deviceId) : setDeviceId(''))))
+			.then(data =>
+				data.map(item => (item.kind === 'videoinput' ? setDeviceInfo(prev => [...prev, item]) : setDeviceInfo(prev => [...prev]))),
+			)
 			.catch(err => console.log(err));
 	}, []);
 
@@ -90,6 +100,11 @@ export const App = React.memo(() => {
 		[result],
 	);
 
+	React.useEffect(() => console.log('deviceInfo', deviceInfo), [deviceInfo]);
+
+	const handleChange = React.useCallback(event => {
+		setDeviceId(event.target.value);
+	}, []);
 	return (
 		<React.Fragment>
 			<Global styles={globalStyles} />
@@ -106,6 +121,13 @@ export const App = React.memo(() => {
 			</WrapperStyled>
 			<ResultAreaStyled>
 				{getResult}
+				<SelectStyled onChange={handleChange}>
+					{deviceInfo.map(device => (
+						<option key={device.deviceId} value={device.deviceId}>
+							{device.label}
+						</option>
+					))}
+				</SelectStyled>
 				<button onClick={reset}>Turn off Camera</button>
 			</ResultAreaStyled>
 		</React.Fragment>
